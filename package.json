@@ -1,0 +1,26 @@
+{
+  "name": "caddy-json-types",
+  "version": "1.0.0",
+  "description": "TypeScript typings for Caddy JSON configuration. This package provides comprehensive TypeScript definitions for Caddy's JSON configuration format, enabling type safety and enhanced developer experience when working with Caddy's configuration files in TypeScript projects.",
+  "main": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "caddy",
+    "typescript",
+    "typings",
+    "json",
+    "configuration"
+  ],
+  "author": "CafuChino <kirino@cafuchino.cn>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CafuChino/caddy-json-types.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CafuChino/caddy-json-types/issues"
+  },
+  "homepage": "https://github.com/CafuChino/caddy-json-types#readme"
+}
