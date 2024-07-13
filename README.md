@@ -28,10 +28,10 @@ yarn add caddy-json-types
 To use the typings in your TypeScript project, import the package in your TypeScript files:
 
 ```typescript
-import type { CaddyConfig } from 'caddy-json-types';
+import type { IConfig } from 'caddy-json-types';
 
 // Example usage
-const config: CaddyConfig = {
+const config: IConfig = {
     // your Caddy JSON configuration here
 };
 ```
@@ -41,9 +41,9 @@ const config: CaddyConfig = {
 Here's an example of how you can use the typings with a Caddy JSON configuration:
 
 ```typescript
-import type { CaddyConfig } from 'caddy-json-types';
+import type { IConfig } from 'caddy-json-types';
 
-const config: CaddyConfig = {
+const config: IConfig = {
     apps: {
         http: {
             servers: {

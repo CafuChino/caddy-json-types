@@ -1,6 +1,6 @@
 {
   "name": "caddy-json-types",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript typings for Caddy JSON configuration. This package provides comprehensive TypeScript definitions for Caddy's JSON configuration format, enabling type safety and enhanced developer experience when working with Caddy's configuration files in TypeScript projects.",
   "main": "index.d.ts",
   "scripts": {
