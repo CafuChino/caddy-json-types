@@ -129,7 +129,7 @@ export interface IGithubComGrafanaCertmagicGcsCaddyStorageGcs {
  * Storage is the impelementation of certmagic.Storage interface for Caddy with encryption/decryption layer
  * using [SOPS](https://github.com/getsops/sops). The module accepts any Caddy storage module as the backend. */
 export interface IGithubComMohammed90CaddyEncryptedStorageStorage {
-  backend: IStorage;
+  backend?: IStorage;
   encryption?: Array<unknown>;
   [key: string]: any;
 }
@@ -144,7 +144,7 @@ export interface IGithubComPteichCaddyTlsconsulConsulStorage {
   timeout?: number;
   prefix?: string;
   value_prefix?: string;
-  aes_key?: Array<unknown>;
+  aes_key?: Array<number>;
   tls_enabled?: boolean;
   tls_insecure?: boolean;
   [key: string]: any;
@@ -564,7 +564,7 @@ export interface IStandardLibLog {
  * instance that is producing the log entries, possibly via
  * an environment variable. */
 export interface IModulesLoggingAppendEncoder {
-  wrap: IEncoders;
+  wrap?: IEncoders;
   fields?: Record<string, unknown>;
   [key: string]: any;
 }
@@ -762,7 +762,7 @@ export interface IFilter {
  * log entries before they are actually encoded by
  * an underlying encoder. */
 export interface IModulesLoggingFilterEncoder {
-  wrap: IEncoders;
+  wrap?: IEncoders;
   /**
    * A map of field names to their filters. Note that this
    * is not a module map; the keys are field names.
@@ -774,7 +774,7 @@ export interface IModulesLoggingFilterEncoder {
    * cannot be filtered because they are added by the
    * underlying logging library as special cases: ts,
    * level, logger, and msg. */
-  fields: IFilter;
+  fields?: IFilter;
   [key: string]: any;
 }
 
@@ -833,7 +833,7 @@ export interface IModulesLoggingLogfmtEncoder {
  * single field in the structured log entry. */
 export interface IModulesLoggingSingleFieldEncoder {
   field?: string;
-  fallback: IEncoders;
+  fallback?: IEncoders;
   [key: string]: any;
 }
 
@@ -937,7 +937,7 @@ export interface ILogSampling {
  * exclusive, and longer namespaces have priority. If neither
  * are populated, all logs are emitted. */
 export interface ICustomLog {
-  writer: IWriters;
+  writer?: IWriters;
   /**
    * The encoder is how the log entries are formatted or encoded. */
   encoder?: IEncoders;
@@ -1001,8 +1001,8 @@ export interface IGithubComAbiosoftCaddyExecCmd {
    * Defaults to 10s. */
   timeout?: string;
   at?: Array<string>;
-  log: IWriters;
-  err_log: IWriters;
+  log?: IWriters;
+  err_log?: IWriters;
   [key: string]: any;
 }
 
@@ -1078,7 +1078,7 @@ export interface IGithubComBaldinofCaddySupervisorDefinition {
   dir?: string;
   env?: Record<string, string>;
   redirect_stdout?: IGithubComBaldinofCaddySupervisorOutputTarget;
-  redirect_stderr: IGithubComBaldinofCaddySupervisorOutputTarget;
+  redirect_stderr?: IGithubComBaldinofCaddySupervisorOutputTarget;
   /**
    * RestartPolicy define under which conditions the command should be restarted after exit.
    * Valid values:
@@ -1273,7 +1273,7 @@ export interface IModulesCaddytlsFileCaPool {
  * transport/client.
  * copied from with minor modifications: modules/caddyhttp/reverseproxy/httptransport.go */
 export interface IModulesCaddytlsTlsConfig {
-  ca: ISource;
+  ca?: ISource;
   /**
    * If true, TLS verification of server certificates will be disabled.
    * This is insecure and may be removed in the future. Do not use this
@@ -1336,7 +1336,7 @@ export interface IModulesCaddytlsInlineCaPool {
  * to ensure the resources are available if `EagerValidation`/`eager_validation`
  * is set to `true`. The module also incurs performance cost at every demand. */
 export interface IModulesCaddytlsLazyCertPool {
-  ca: ISource;
+  ca?: ISource;
   /**
    * Whether the validation step should try to load and provision the guest module to validate
    * the correctness of the configuration. Depeneding on the type of the guest module,
@@ -1364,7 +1364,7 @@ export interface IModulesCaddytlsPkiRootCaPool {
 /**
  * StoragePool extracts the trusted certificates root from Caddy storage */
 export interface IModulesCaddytlsStoragePool {
-  storage: IStorage;
+  storage?: IStorage;
   pem_keys?: Array<string>;
   [key: string]: any;
 }
@@ -1420,7 +1420,7 @@ export interface IModulesCaddytlsConnectionPolicy {
    * Because the module's name is given as the key in a
    * module map, the name does not have to be given in the
    * json.RawMessage. */
-  match: IHandshakeMatch;
+  match?: IHandshakeMatch;
   certificate_selection?: IModulesCaddytlsCustomCertSelectionPolicy;
   cipher_suites?: Array<string>;
   curves?: Array<string>;
@@ -1770,7 +1770,7 @@ export interface IModulesCaddyhttpServer {
   trusted_proxies_strict?: number;
   logs?: IModulesCaddyhttpServerLogConfig;
   protocols?: Array<string>;
-  metrics: IModulesCaddyhttpMetrics;
+  metrics?: IModulesCaddyhttpMetrics;
   [key: string]: any;
 }
 
@@ -1936,8 +1936,8 @@ export interface IModulesCaddypkiCa {
    * and Mozilla Firefox trust stores. Default: true. */
   install_trust?: boolean;
   root?: IModulesCaddypkiKeyPair;
-  intermediate: IModulesCaddypkiKeyPair;
-  storage: IStorage;
+  intermediate?: IModulesCaddypkiKeyPair;
+  storage?: IStorage;
   [key: string]: any;
 }
 
@@ -2030,7 +2030,7 @@ export interface IModulesCaddytlsAutomationPolicy {
    * The type of key to generate for certificates.
    * Supported values: `ed25519`, `p256`, `p384`, `rsa2048`, `rsa4096`. */
   key_type?: string;
-  storage: IStorage;
+  storage?: IStorage;
   /**
    * If true, certificates will be managed "on demand"; that is, during
    * TLS handshakes or when needed, as opposed to at startup or config
@@ -2181,7 +2181,7 @@ export interface IModulesCaddytlsAutomationConfig {
  * of generating STEKs internally. This allows STEKs to be
  * coordinated, improving TLS session resumption in a cluster. */
 export interface IModulesCaddytlsDistributedstekProvider {
-  storage: IStorage;
+  storage?: IStorage;
   [key: string]: any;
 }
 
@@ -2261,7 +2261,7 @@ export interface IModulesCaddytlsTls {
    * Because the module's name is given as the key in a
    * module map, the name does not have to be given in the
    * json.RawMessage. */
-  certificates: ICertificates;
+  certificates?: ICertificates;
   automation?: IModulesCaddytlsAutomationConfig;
   session_tickets?: IModulesCaddytlsSessionTicketService;
   cache?: IModulesCaddytlsCertCacheOptions;
@@ -2854,7 +2854,7 @@ export interface ISubsystem {
  * RSA-4096 and Ed25519 keys are generated and stored. The ECDSA key is only loaded, not generated.
  * It is the default signer. */
 export interface IGithubComKadeesshKadeesshInternalSignerFallback {
-  storage: IStorage;
+  storage?: IStorage;
   [key: string]: any;
 }
 
@@ -3027,7 +3027,7 @@ export interface IGithubComKadeesshKadeesshInternalAuthenticationPasswordAuthFlo
    * Because the module's name is given as the key in a
    * module map, the name does not have to be given in the
    * json.RawMessage. */
-  providers: IPassword;
+  providers?: IPassword;
   permit_empty_passwords?: boolean;
   [key: string]: any;
 }
@@ -3075,7 +3075,7 @@ export interface IGithubComKadeesshKadeesshInternalAuthenticationPublicKeyFlow {
    * Because the module's name is given as the key in a
    * module map, the name does not have to be given in the
    * json.RawMessage. */
-  providers: IPublicKey;
+  providers?: IPublicKey;
   [key: string]: any;
 }
 
@@ -3084,7 +3084,7 @@ export interface IGithubComKadeesshKadeesshInternalAuthenticationPublicKeyFlow {
  * authentication flow. nil value disables the authentication flow.
  * InteractiveFlow holds the interactive authentication providers */
 export interface IGithubComKadeesshKadeesshInternalAuthenticationInteractiveFlow {
-  providers: Record<string, any>; // namespace not found: ssh.providers.interactive
+  providers?: Record<string, any>; // namespace not found: ssh.providers.interactive
   [key: string]: any;
 }
 
@@ -3275,7 +3275,7 @@ export interface IGithubComKadeesshKadeesshInternalServer {
    * Because the module's name is given as the key in a
    * module map, the name does not have to be given in the
    * json.RawMessage. */
-  subsystems: ISubsystem;
+  subsystems?: ISubsystem;
   /**
    * ConfigList is a list of server config providers that can
    * custom configure the server based on the session */
@@ -3988,7 +3988,7 @@ export interface IGithubComMohammed90CaddyProfilingPyroscopeApp {
    * time.Duration value such as `300ms`, `1.5h`, or `2h45m`;
    * valid units are `ns`, `us`/`µs`, `ms`, `s`, `m`, `h`, and `d`. */
   upload_rate?: IDuration;
-  parameters: IGithubComMohammed90CaddyProfilingParameters;
+  parameters?: IGithubComMohammed90CaddyProfilingParameters;
   [key: string]: any;
 }
 
@@ -4075,7 +4075,7 @@ export interface IApps {
 export interface IConfig {
   admin?: IAdminConfig;
   logging?: ILogging;
-  storage: IStorage;
+  storage?: IStorage;
   /**
    * AppsRaw are the apps that Caddy will load and run. The
    * app module name is the key, and the app's config is the
@@ -4086,6 +4086,6 @@ export interface IConfig {
    * Because the module's name is given as the key in a
    * module map, the name does not have to be given in the
    * json.RawMessage. */
-  apps: IApps;
+  apps?: IApps;
   [key: string]: any;
 }
